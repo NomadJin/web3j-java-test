@@ -1,0 +1,10 @@
+kaleido:
+  network:
+    rpcEndpoint: "https://k0y4s2dcjl-k0wh7uhynx-rpc.kr0-aws.kaleido.io/"
+    user: "k0h6brqo7d"
+    password: "x39gQGJj_vv1Dxv8pixtZOWNmALi9tYzypBZqNGzZp8"
+    accountAddress: "0xb999ad96541f17e9496f2411b71e8248b6834621"
+  contract:
+    address: "0x0E1C44F81050e29626164b68F0B13f5ac6Ae15B3"
+
+

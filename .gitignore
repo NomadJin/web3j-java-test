@@ -1,0 +1,11 @@
+.idea/
+build/
+migrations/
+node_modules/
+target/
+test/
+tmp/
+tmp2/
+package.json
+package-lock.json
+truffle-config.js

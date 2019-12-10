@@ -1,0 +1,10 @@
+kaleido:
+  network:
+    rpcEndpoint: "PROD"
+    user: "k0h6brqo7d"
+    password: "x39gQGJj_vv1Dxv8pixtZOWNmALi9tYzypBZqNGzZp8"
+    address: "0xb999ad96541f17e9496f2411b71e8248b6834621"
+  contract:
+    address: "0x411c87Dc8D54E61c996e3a24568839b0484C5dAc"
+
+
