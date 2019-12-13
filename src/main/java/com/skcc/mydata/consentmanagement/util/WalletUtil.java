@@ -1,21 +1,15 @@
-package com.skcc.mydata.consentmanagement;
+package com.skcc.mydata.consentmanagement.util;
 
-import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Component;
 import org.web3j.crypto.*;
 
 import java.math.BigInteger;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
 import java.util.UUID;
 
+public class WalletUtil {
 
-@Component
-public class KeyUtil {
-
-    public JSONObject generateWallet() throws Exception{
+    public static JSONObject generateWallet() throws Exception{
 
         String seed = UUID.randomUUID().toString();
         //JSONObject result = process(seed); // get a json containing private key and address

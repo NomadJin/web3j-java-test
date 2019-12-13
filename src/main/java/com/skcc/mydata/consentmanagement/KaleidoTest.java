@@ -1,6 +1,6 @@
 package com.skcc.mydata.consentmanagement;
 
-import com.skcc.mydata.consentmanagement.config.KaleidoConfig;
+import com.skcc.mydata.consentmanagement.config.BlockchainConfig;
 import com.skcc.mydata.consentmanagement.contracts.GetterSetter;
 import com.skcc.mydata.consentmanagement.test.App;
 import okhttp3.*;
@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 
 public final class KaleidoTest {
 
-    private KaleidoConfig kaleidoConfig;
+    private BlockchainConfig blockchainConfig;
 
     // Fill these in to test, ex. remove @RPC_ENDPOINT@
     private static final String USER = "k0h6brqo7d";

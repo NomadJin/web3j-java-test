@@ -1,43 +1,37 @@
 package com.skcc.mydata.consentmanagement;
 
-import com.skcc.mydata.consentmanagement.config.KaleidoConfig;
+import com.skcc.mydata.consentmanagement.config.BlockchainConfig;
 import com.skcc.mydata.consentmanagement.contracts.ConsentContract;
-import com.skcc.mydata.consentmanagement.contracts.GetterSetter;
 import com.skcc.mydata.consentmanagement.model.Consent;
 import com.skcc.mydata.consentmanagement.service.ConsentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.web3j.abi.FunctionEncoder;
 import org.web3j.abi.TypeReference;
-import org.web3j.abi.datatypes.DynamicBytes;
 import org.web3j.abi.datatypes.Utf8String;
 import org.web3j.abi.datatypes.generated.Uint256;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.methods.request.Transaction;
 import org.web3j.protocol.core.methods.response.*;
-import org.web3j.protocol.exceptions.TransactionException;
 import org.web3j.tuples.generated.Tuple2;
 import org.web3j.tuples.generated.Tuple8;
 import org.web3j.tx.ClientTransactionManager;
 import org.web3j.tx.gas.StaticGasProvider;
 
-import javax.annotation.PostConstruct;
-import java.io.IOException;
 import java.math.BigInteger;
 import java.util.*;
-import java.util.concurrent.ExecutionException;
+
 import org.web3j.abi.datatypes.Function;
 
 import org.web3j.abi.FunctionReturnDecoder;
 import org.web3j.abi.datatypes.Type;
-import org.web3j.protocol.admin.methods.response.PersonalUnlockAccount;
 import org.web3j.protocol.core.DefaultBlockParameterName;
 
 
 @Component
 public class ConsentContractTest {
     @Autowired
-    private KaleidoConfig kaleidoConfig;
+    private BlockchainConfig blockchainConfig;
 
     @Autowired
     private Web3j web3j;
@@ -51,7 +45,7 @@ public class ConsentContractTest {
     private void init() {
 
         boolean usingCredentials = false;
-        String contractAddress = kaleidoConfig.getContractAddress();
+        String contractAddress = blockchainConfig.getContractAddress();
 
         if( usingCredentials ) {
             System.out.println("using org.web3j.crypto.Credentials (using privarte key) ...");
@@ -68,7 +62,7 @@ public class ConsentContractTest {
             consentContract = ConsentContract.load(
                     contractAddress,
                     web3j,
-                    new ClientTransactionManager(web3j, kaleidoConfig.getAccountAddress()),  // address in Wallet
+                    new ClientTransactionManager(web3j, blockchainConfig.getAccountAddress()),  // address in Wallet
                     new StaticGasProvider(BigInteger.ZERO, BigInteger.valueOf(4_500_000))
             );
         }
@@ -121,7 +115,7 @@ public class ConsentContractTest {
 
     public BigInteger getNonce() throws Exception {
         EthGetTransactionCount ethGetTransactionCount = web3j.ethGetTransactionCount(
-                kaleidoConfig.getAccountAddress(), DefaultBlockParameterName.LATEST).sendAsync().get();
+                blockchainConfig.getAccountAddress(), DefaultBlockParameterName.LATEST).sendAsync().get();
 
         BigInteger nonce = ethGetTransactionCount.getTransactionCount();
 
@@ -137,7 +131,8 @@ public class ConsentContractTest {
 
         if(true) return;
 
-        Consent consent = new Consent();
+        Consent consent = new Consent("0x18446A8Ca1d8e1dd75aBdB4cC1FB6a9D0431cce4", "0x18446A8Ca1d8e1dd75aBdB4cC1FB6a9D0431cce4", "1", "2", "3", "4",
+                BigInteger.valueOf(1000000), BigInteger.valueOf(2000000), BigInteger.valueOf(30000000));
         consent.setUserId("0x18446A8Ca1d8e1dd75aBdB4cC1FB6a9D0431cce4");
         consent.setConsentId("0x18446A8Ca1d8e1dd75aBdB4cC1FB6a9D0431cce4");
         consent.setServiceId("1");
@@ -169,11 +164,11 @@ public class ConsentContractTest {
 
         String encodedFunction = FunctionEncoder.encode(function);
         Transaction transaction = Transaction.createFunctionCallTransaction(
-                kaleidoConfig.getAccountAddress(),
+                blockchainConfig.getAccountAddress(),
                 nonce,
                 BigInteger.ZERO,
                 BigInteger.valueOf(4_500_000),
-                kaleidoConfig.getContractAddress(),
+                blockchainConfig.getContractAddress(),
                 encodedFunction);
 
 
@@ -250,7 +245,7 @@ public class ConsentContractTest {
 
     public Object ethCall(Function function) throws Exception {
 
-        Transaction transaction = Transaction.createEthCallTransaction(kaleidoConfig.getAccountAddress(), kaleidoConfig.getContractAddress(), FunctionEncoder.encode(function));
+        Transaction transaction = Transaction.createEthCallTransaction(blockchainConfig.getAccountAddress(), blockchainConfig.getContractAddress(), FunctionEncoder.encode(function));
 
         //3. ethereum 호출후 결과 가져오기
         EthCall ethCall = web3j.ethCall(transaction, DefaultBlockParameterName.LATEST).send();

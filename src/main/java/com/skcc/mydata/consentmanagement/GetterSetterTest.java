@@ -1,9 +1,8 @@
 package com.skcc.mydata.consentmanagement;
 
-import com.skcc.mydata.consentmanagement.config.KaleidoConfig;
+import com.skcc.mydata.consentmanagement.config.BlockchainConfig;
 import com.skcc.mydata.consentmanagement.contracts.GetterSetter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.methods.response.*;
 import org.web3j.tx.ClientTransactionManager;
@@ -20,7 +19,7 @@ import java.math.BigInteger;
 public class GetterSetterTest {
 
     @Autowired
-    private KaleidoConfig kaleidoConfig;
+    private BlockchainConfig blockchainConfig;
 
     @Autowired
     private Web3j web3j;
@@ -70,7 +69,7 @@ public class GetterSetterTest {
     private void init() {
 
         boolean usingCredentials = false;
-        String contractAddress = kaleidoConfig.getContractAddress();
+        String contractAddress = blockchainConfig.getContractAddress();
 
         if( usingCredentials ) {
             System.out.println("using org.web3j.crypto.Credentials");

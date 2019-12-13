@@ -4,8 +4,9 @@ import java.math.BigInteger;
 
 public class Consent {
 
-    private String userId;
     private String consentId;
+    private String userId;
+
     private String serviceId;
     private String serviceVersion;
     private String dataSinkId;
@@ -15,6 +16,42 @@ public class Consent {
     private BigInteger endDtm;
     private BigInteger registDtm;
     private BigInteger withdrawalDtm;
+
+    public Consent(String consentId, String userId, String serviceId, String serviceVersion, String dataSinkId, String groupInfos,
+                   BigInteger startDtm, BigInteger endDtm, BigInteger registDtm, BigInteger withdrawDtm) {
+        this.consentId = consentId;
+        this.userId = userId;
+
+        this.serviceId = serviceId;
+        this.serviceVersion = serviceVersion;
+        this.dataSinkId = dataSinkId;
+        this.groupInfos = groupInfos;
+
+        this.startDtm = startDtm;
+        this.endDtm = endDtm;
+        this.registDtm = registDtm;
+        this.withdrawalDtm = withdrawDtm;
+    }
+
+    public Consent(String consentId, String userId, String serviceId, String serviceVersion, String dataSinkId, String groupInfos,
+                   BigInteger startDtm, BigInteger endDtm, BigInteger registDtm) {
+        this.consentId = consentId;
+        this.userId = userId;
+
+        this.serviceId = serviceId;
+        this.serviceVersion = serviceVersion;
+        this.dataSinkId = dataSinkId;
+        this.groupInfos = groupInfos;
+
+        this.startDtm = startDtm;
+        this.endDtm = endDtm;
+        this.registDtm = registDtm;
+        this.withdrawalDtm = new BigInteger("0");
+    }
+
+    public Consent() {
+
+    }
 
     public BigInteger getWithdrawalDtm() {
         return withdrawalDtm;
